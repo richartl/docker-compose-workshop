@@ -1,0 +1,38 @@
+version: '3'
+services:
+  db:
+    image: mysql:5
+    hostname: "test_db"
+    container_name: "test_db"
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_db'
+      MYSQL_DATABASE: 'test_db'
+  wordpress:
+    image: wordpress
+    hostname: "test_wordpress"
+    container_name: "test_wordpress"
+    depends_on:
+      - db
+    volumes:
+      - ./src:/var/www/html/wp-content
+    ports:
+      - "4000:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: "test_db"
+      WORDPRESS_DB_NAME: "test_db"
+      WORDPRESS_TABLE_PREFIX: "test"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    hostname: "test_phpmyadmin"
+    container_name: "test_phpmyadmin"
+    ports:
+      - 8000:80
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+volumes:
+  db_data:

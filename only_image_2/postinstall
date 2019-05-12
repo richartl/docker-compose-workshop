@@ -1,0 +1,4 @@
+#!/bin/bash
+bundle install
+ruby say_hello.rb
+/bin/sh
