@@ -20,7 +20,7 @@ services:
     ports:
       - 4000:80
     environment:
-      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_HOST: db
       WORDPRESS_DB_PASSWORD: "test_db"
       WORDPRESS_DB_NAME: "test_db"
       WORDPRESS_TABLE_PREFIX: "test"
