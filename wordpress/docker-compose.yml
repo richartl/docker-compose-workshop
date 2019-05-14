@@ -7,8 +7,8 @@ services:
     volumes:
       - db_data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: 'test_db'
-      MYSQL_DATABASE: 'test_db'
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
   wordpress:
     image: wordpress
     hostname: "test_wordpress"
@@ -18,7 +18,7 @@ services:
     volumes:
       - ./src:/var/www/html/wp-content
     ports:
-      - "4000:80"
+      - 4000:80
     environment:
       WORDPRESS_DB_HOST: db:3306
       WORDPRESS_DB_PASSWORD: "test_db"
